@@ -1,28 +1,24 @@
-// src/components/Products.js
-import React, { useEffect, useContext } from 'react';
-import { GlobalContext } from '../context/GlobalState';
+import React, { useEffect, useState } from 'react';
 
-const Products = () => {
-  const { state, dispatch } = useContext(GlobalContext);
+function Products() {
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     fetch('http://localhost:3000/products')
       .then(response => response.json())
-      .then(data => dispatch({ type: 'SET_PRODUCTS', payload: data }));
-  }, [dispatch]);
+      .then(data => setProducts(data));
+  }, []);
 
   return (
     <div>
       <h1>Products</h1>
-      {state.products.map(product => (
-        <div key={product.id}>
-          <h2>{product.name}</h2>
-          <p>{product.description}</p>
-          <p>${product.price}</p>
-        </div>
-      ))}
+      <ul>
+        {products.map(product => (
+          <li key={product.id}>{product.name}</li>
+        ))}
+      </ul>
     </div>
   );
-};
+}
 
 export default Products;

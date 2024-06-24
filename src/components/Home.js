@@ -1,12 +1,11 @@
-// src/components/Home.js
 import React from 'react';
 
-const Home = () => {
+function Home() {
   return (
     <div>
       <h1>Welcome to the E-commerce Platform</h1>
     </div>
   );
-};
+}
 
 export default Home;
